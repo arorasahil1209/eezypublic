@@ -25,7 +25,7 @@ const userLogin = async (req,res) => {
                 if(result){
                     const token = jwt.sign({
                         email:user[0].email,
-                        role:user[0]?.role
+                        role:user[0].role || 'default'
                     },"secret",{
                         expiresIn:'4h'
                     });
