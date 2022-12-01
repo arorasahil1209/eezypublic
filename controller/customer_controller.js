@@ -28,6 +28,7 @@ const addCustomer = async (req, res) => {
        const addNewCustomer= new Customer({
         _id: mongoose.Types.ObjectId(),
         customerId:req.body.customerId,
+        customerName:req.body.customerName,
         isActive:true
        })
        console.log('addNewCustomer',addNewCustomer)
@@ -46,8 +47,26 @@ const addCustomer = async (req, res) => {
     };
 }
 
+const deleteCustomer = async (req, res) => {
+    try {
+       const removeCustomer= await Customer.deleteMany({customerId:req.body.customerId})
+       console.log('removeCustomer',removeCustomer)
+       return res.status(200).json({
+           message: 'customer  removed successfully!',
+           response: removeCustomer,
+       });
+    } catch (err) {
+        console.log("error while removing the customer", err)
+        return res.status(500).json({
+            message: "Not able to remove the customer",
+            response: err
+        })
+    };
+}
+
 
 module.exports = {
     customerList,
-    addCustomer
+    addCustomer,
+    deleteCustomer
 }

@@ -1,6 +1,7 @@
 {
     "port":3012,
-    "mongouri":"mongodb+srv://eezy:admin123@eezy.zppoawf.mongodb.net/eezy?retryWrites=true&w=majority",
+    "mongouri":"mongodb://localhost:27017/eezy",
     "secret":"secret"
 }
+
 
