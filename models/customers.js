@@ -17,6 +17,10 @@ const customerSchema  = new Schema ({
         type:String,
         required:false
     },
+    customerRefreshToken:{
+        type:String,
+        required:false
+    },
     isActive:{
         type:Boolean,
         required:true,

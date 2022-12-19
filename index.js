@@ -14,7 +14,7 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(express.urlencoded({extended:false}))
 
-const uri = Config.mongouri;
+const uri = Config.mongourilocal;
 
 mongoose.connect(uri).then((response)=>{
     console.log(`connection eastablished with the database`)

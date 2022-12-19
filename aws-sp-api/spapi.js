@@ -1,14 +1,17 @@
 const SellingPartnerAPI = require("amazon-sp-api");
 
-async function execute_sp_api(operation, endpoint, path, query) {
+async function execute_sp_api(operation, endpoint, path, query,refreshToken) {
   try {
     let sellingPartner = new SellingPartnerAPI({
       region: "eu",
       options: {
         only_grantless_operations: false,
       },
+      /*
       refresh_token:
         "Atzr|IwEBIA3Ed8EWyiYm8NUE54LpmimZlbT7smQYaWVljxIgXYE1NWBSGYVooyQUBwHg37ROAXnOVDNGr3HqbjLLMlWZp_FumIyXA8WQFhIxl5xqQ52joIdg8GhnD56lkDymniDRIN-IYzG2O4jQobJGfAAX42BiIuUBnmgzfnT6xMfpWj-NKvNU4knprR0bUo6O8ZegK3-ubID2tRqzt9P3SpZBn2yu1yOfn2EL2S9j1xYoPdiwS9_yq4m9pq26Ws93N4Un_AHPX6Rm62C8zVres_WlYcE_DxHZA1JRR2e30giIye6WNGuKskZ-sIwe88WCYhJWiFz0u1z7y0JxnZp-R1k5SVov",
+      */
+      refresh_token:refreshToken,
       credentials: {
         SELLING_PARTNER_APP_CLIENT_ID:
           "amzn1.application-oa2-client.65458ab2d81f49c3bc62ad0bc728194c",
@@ -26,7 +29,6 @@ async function execute_sp_api(operation, endpoint, path, query) {
       path: path,
       query: query,
     });
-    console.log(JSON.stringify(res));
     return res;
   } catch (e) {
     console.log(e);
