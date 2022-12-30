@@ -5,6 +5,7 @@ let mongoose = require('mongoose');
 let userAuth = require('./router/user');
 let customer = require('./router/customer');
 let order = require('./router/order');
+let product = require('./router/product'); 
 let bodyParser = require('body-parser');
 
 
@@ -29,6 +30,7 @@ mongoose.connect(uri).then((response)=>{
 app.use(userAuth);
 app.use(customer);
 app.use(order);
+app.use(product);
 app.listen(Config.port,()=>{
     console.log('app is running at',Config.port);
 });

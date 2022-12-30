@@ -4,10 +4,11 @@ const {orderList,orderById,syncOrder,syncOrderItems} =  require('../controller/o
 //"mongouri":"mongodb+srv://eezy:admin123@eezy.zppoawf.mongodb.net/eezy?retryWrites=true&w=majority",
 let router = express.Router();
 
-router.get('/order-list',checkAuth,orderList)
+router.post('/order-list',checkAuth,orderList)
 router.get('/order-detail',checkAuth,orderById)
 
 
 router.get('/sync-order',syncOrder)
+
 router.get('/sync-order-items',syncOrderItems)
 module.exports = router;

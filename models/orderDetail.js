@@ -84,6 +84,11 @@ const orderDetailSchema  = new Schema ({
         required:false,
         unique:true
     },
+    CustomerId:{
+        type:String,
+        required:false,
+        unique:true
+    },
     QuantityShipped:{
         type:Number,
         required:false
