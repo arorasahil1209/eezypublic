@@ -4,7 +4,7 @@ const {customerList,addCustomer,deleteCustomer} =  require('../controller/custom
 //"mongouri":"mongodb+srv://eezy:admin123@eezy.zppoawf.mongodb.net/eezy?retryWrites=true&w=majority",
 let router = express.Router();
 
-router.get('/customer-list',checkAuth,customerList)
+router.get('/customer-list',customerList)
 router.post('/add-customer',checkAuth, addCustomer);
 router.post('/remove-customer',checkAuth, deleteCustomer);
 

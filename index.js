@@ -1,6 +1,6 @@
 let express = require('express');
 let cors = require('cors');
-
+const db = require("./app/models");
 let mongoose = require('mongoose');
 let userAuth = require('./router/user');
 let customer = require('./router/customer');
@@ -24,7 +24,13 @@ mongoose.connect(uri).then((response)=>{
 })
 
 
-
+db.sequelize.sync({force:false})
+  .then(() => {
+    console.log("Synced db.");
+  })
+  .catch((err) => {
+    console.log("Failed to sync db: " + err.message);
+});
 
 
 app.use(userAuth);

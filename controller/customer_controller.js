@@ -2,13 +2,14 @@ const Customer = require('../models/customers');
 const mongoose = require("mongoose");
 var qs = require('qs');
 const axios = require('axios');
+
+const db = require("../app/models");
+const Customers = db.customers;
+
 /* controller to get all customers */
 const customerList = async (req, res) => {
     try {
-        const getCustomers = await Customer.find()
-        .skip(req.query.skip)
-        .limit(req.query.limit)
-        ;
+        const getCustomers = await Customers.findAll({});
         console.log('get all customers', getCustomers);
         return res.status(200).json({
             message: 'list of active customers!',

@@ -3,11 +3,16 @@ const UserLoginDetail = require('../models/user');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const mongoose = require("mongoose");
+const db = require("../app/models");
+const UserAuth = db.userAuth;
 /* controller to make user to login */
 const userLogin = async (req,res) => {
     console.log('password::',req.body);
-    await User.find({email:req.body.email})
-    .exec()
+    await UserAuth.findAll(
+        {
+            where:{email:req.body.email}
+        }
+        )
     .then((user)=>{
         if(user.length < 1){
             return res.status(409).json({
@@ -27,7 +32,7 @@ const userLogin = async (req,res) => {
                         email:user[0].email,
                         role:user[0].role || 'default'
                     },"secret",{
-                        expiresIn:'4h'
+                        expiresIn:'365d'
                     });
                     return res.status(200).json({
                         message:'user logged in successfully..',
@@ -48,20 +53,26 @@ const userLogin = async (req,res) => {
 
 
 const userSignUp = async(req,res) => {
-    let findUser =  await User.find({email:req.body.email})
+    let findUser =  await UserAuth.findAll(
+        {
+        where:{email:req.body.email},
+        raw:true
+        }
+        )
     console.log("user find",findUser);
     if(findUser.length > 0 ){
         return res.status(409).json({
             messahe:'invalid user,auth failed'
         })
     }else {
+        console.log('here:::');
         bcrypt.hash(req.body.password,10,async (err,hash)=>{
             if(err){
                 return res.status(500).json({
                     message:'error while encrypting the password'
                 })
             } else {
-                const Users = new User({
+                const Users = new UserAuth({
                     _id:mongoose.Types.ObjectId(),
                     firstName:req.body.firstName,
                     lastName:req.body.lastName,
