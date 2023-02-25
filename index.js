@@ -32,6 +32,11 @@ db.sequelize.sync({force:false})
     console.log("Failed to sync db: " + err.message);
 });
 
+app.get('/',(req,res)=>{
+  res.status(200).json({
+    message:'welcome to eezy life sales application'
+  })
+})
 
 app.use(userAuth);
 app.use(customer);
